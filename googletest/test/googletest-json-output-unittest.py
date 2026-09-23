@@ -810,7 +810,7 @@ class GTestJsonOutputUnitTest(gtest_test_utils.TestCase):
         '%s=json:%s' % (GTEST_OUTPUT_FLAG, json_path),
         '--shut_down_xml',
     ]
-    p = gtest_test_utils.Subprocess(command, env=env)
+    p = gtest_test_utils.Subprocess(command)
     if p.terminated_by_signal:
       # p.signal is available only if p.terminated_by_signal is True.
       self.assertFalse(
@@ -864,7 +864,7 @@ class GTestJsonOutputUnitTest(gtest_test_utils.TestCase):
         gtest_prog_path,
         '%s=json:%s' % (GTEST_OUTPUT_FLAG, json_path),
     ] + extra_args
-    p = gtest_test_utils.Subprocess(command)
+    p = gtest_test_utils.Subprocess(command, env=env)
     if p.terminated_by_signal:
       self.assertTrue(
           False, '%s was killed by signal %d' % (gtest_prog_name, p.signal)
